@@ -41,7 +41,7 @@
 │── requirements.txt
 │── .github/
 │   ├── workflows/
-│       ├── run_pipeline.yml  # Arquivo do GitHub Actions
+│       ├── run_pipeline.yml  # GitHub Actions file
 │── README.md
 ```
 
@@ -133,7 +133,7 @@ Bins  | Vol    | Bad Rate (%) |
 
 ▶ The `inference_pipe` notebook uses the `preprocessing.py` and `inference.py` files to treat the dataset and predict the scores and bins
 
-▶ The code uses MLOps and Software Engineering techniches 
+▶ The code uses MLOps and Software Engineering techniches and Github actions .yaml file to make the inference pipe automatized 
 
 
 <h3 align="left">Contact me:</h3>
