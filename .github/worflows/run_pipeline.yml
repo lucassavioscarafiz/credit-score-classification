@@ -1,0 +1,52 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: '0 0 * * *'  
+
+jobs:
+  inference:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repo Checkout
+        uses: actions/checkout@v3
+
+      - name: Config python enviroment
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install requirements
+        run: pip install -r requirements.txt
+
+      - name: Check if it has a new file
+        id: check_new_file
+        run: |
+          latest_file=$(ls -t data/*.csv | head -n 1)
+          if [[ ! -f "latest_file_marker.txt" || "$(cat latest_file_marker.txt)" != "$latest_file" ]]; then
+            echo "$latest_file" > latest_file_marker.txt
+            echo "Novo arquivo detectado: $latest_file"
+            echo "::set-output name=new_file::true"
+          else
+            echo "Nenhum arquivo novo detectado."
+            echo "::set-output name=new_file::false"
+          fi
+
+      - name: Execute inference pipe
+        if: steps.check_new_file.outputs.new_file == 'true'
+        run: |
+          cd notebooks
+          papermill inference_pipeline.ipynb inference_pipeline_output.ipynb
+
+      - name: Commit results
+        if: steps.check_new_file.outputs.new_file == 'true'
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add data/inference_data_scored.csv latest_file_marker.txt
+          git commit -m "Atualizando predições com nova inferência" || echo "Nenhuma mudança para commitar"
+          git push
