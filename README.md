@@ -74,7 +74,6 @@ params = {
 
 ▶ To evaluate the model the follow techniques are used: 
 1) General and KS (Kolmogorov-Smirnov) test per month
-2) AUC & Calibration plot curve
 
 Train KS  | OOS KS | AUC Curve | 
 --------- | ------ | --------- |  
@@ -105,6 +104,10 @@ Test         | Jul   | 59.7%        | 0.70  |
 Test         | Aug   | 61.8%        | 0.72  |
 
 ![image](https://github.com/user-attachments/assets/319f47a5-fa0e-4ff4-ac11-43dc4e710498)
+
+2) AUC & Calibration plot curve
+
+![image](https://github.com/user-attachments/assets/f0729609-23b3-49b9-b135-651987aca171)
 
 3) Stability of bins in Train and OOS datasets
 
