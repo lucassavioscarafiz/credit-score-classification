@@ -10,6 +10,7 @@
 
 ### ⚙ Project Structure ⚙
 
+ ```
 /credit-scoring-inference/
 │── data/                      # Datasets
 │   ├── test.csv
@@ -42,6 +43,7 @@
 │   ├── workflows/
 │       ├── run_pipeline.yml  # Arquivo do GitHub Actions
 │── README.md
+```
 
 ## 2.0. Model Building 🔧
 
@@ -51,6 +53,7 @@
 
 ▶ The hyperparameters were found by using `BayesianSearch()` technique.
 
+```
 params = {
     'lgbm': {
         'learning_rate': 0.11699106844426276,
@@ -63,6 +66,7 @@ params = {
         'subsample': 0.7799999999999999
     }
 }
+```
 
 ▶ The features choosed for the model are the top features with highest Information Values (IV) values (statistical technique used on credit risk models) and with the best SHAP shape
 
