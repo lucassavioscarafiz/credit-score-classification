@@ -61,6 +61,7 @@ def predict_fn(data, model):
     
     df_scored['score_modelv6'] = 1000*model.predict_proba(df_scored[model_features])[:,1]
     df_scored['score_modelv6'] = 1000-df_scored['score_modelv6']
+    df_scored['target_predicted'] = model.predict(df_scored[model_features])
     df_scored['gh'] = pd.cut(df_scored['score_modelv6'], bins = bins_opt, labels = labels_opt)
     
     return df_scored
